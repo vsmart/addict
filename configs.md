@@ -170,3 +170,7 @@ config :addict,
   (...),
   password_reset_token_time_to_expiry: 120
 ```
+
+# Template Layout
+
+By default, addict provides you with a base layout in `addict.html`. You can customize the base layout to use your own by supplying a `base_layout` config.

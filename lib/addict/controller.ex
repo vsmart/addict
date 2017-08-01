@@ -29,7 +29,7 @@ defmodule Addict.AddictController do
   def register(%{method: "GET"} = conn, _) do
     csrf_token = generate_csrf_token
     conn
-    |> put_addict_layout
+    |> put_base_layout
     |> render("register.html", csrf_token: csrf_token)
   end
 
@@ -56,7 +56,7 @@ defmodule Addict.AddictController do
   def login(%{method: "GET"} = conn, _) do
     csrf_token = generate_csrf_token
     conn
-    |> put_addict_layout
+    |> put_base_layout
     |> render("login.html", csrf_token: csrf_token)
   end
 
@@ -92,7 +92,7 @@ defmodule Addict.AddictController do
   def recover_password(%{method: "GET"} = conn, _) do
     csrf_token = generate_csrf_token
     conn
-    |> put_addict_layout
+    |> put_base_layout
     |> render("recover_password.html", csrf_token: csrf_token)
   end
 
@@ -117,7 +117,7 @@ defmodule Addict.AddictController do
     token = params["token"]
     signature = params["signature"]
     conn
-    |> put_addict_layout
+    |> put_base_layout
     |> render("reset_password.html", token: token, signature: signature, csrf_token: csrf_token)
   end
 
@@ -148,9 +148,9 @@ defmodule Addict.AddictController do
     |> json(%{errors: errors})
   end
 
-  defp put_addict_layout(conn) do
+  defp put_base_layout(conn) do
     conn
-    |> put_layout({Addict.AddictView, "addict.html"})
+    |> put_layout({Addict.AddictView, Addict.Configs.base_layout || "addict.html"})
   end
 
   defp generate_csrf_token do
