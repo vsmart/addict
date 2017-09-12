@@ -123,9 +123,9 @@ defmodule Addict.AddictController do
 
   defp return_success(conn, user, custom_fn, status \\ 200) do
     conn
-    |> put_status(status)
+    #    |> put_status(status)
     |> invoke_hook(custom_fn, :ok, user)
-    |> json(Addict.Presenter.strip_all(user))
+    #    |> json(Addict.Presenter.strip_all(user))
     |> redirect(to: "/")
   end
 
